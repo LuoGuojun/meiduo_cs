@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import os
+import os, sys
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +26,8 @@ SECRET_KEY = 'g2)!f2296xlgpe-_s8x^b9py!u8d807bmj&p)_ea!ri_@2#by$'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 # Application definition
 
@@ -35,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'contents'
 ]
 
 MIDDLEWARE = [
@@ -137,6 +142,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# 配置静态文件加载路径
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 #日志配置
 LOGGING = {
@@ -179,3 +186,5 @@ LOGGING = {
         },
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
